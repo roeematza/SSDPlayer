@@ -55,4 +55,9 @@ public class WriteAmplificationGetter implements StatisticsGetter {
 		double valueWA = total==0 ? 1 : ((double)total)/device.getTotalWritten();
 		return valueWA;
 	}
+	
+	@Override
+	public Entry<String, String> getInfoEntry(Device<?, ?, ?, ?> device) {
+		return new AbstractMap.SimpleEntry("Write amplification", Double.toString(computeWA(device)));
+	}
 }

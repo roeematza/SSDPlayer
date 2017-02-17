@@ -79,4 +79,9 @@ public class LogicalWritesPerEraseGetter implements StatisticsGetter {
 	public GeneralStatisticsGraph getStatisticsGraph() {
 		return new RegularHistoryGraph("Writes Per Erase", this, maxPagesPerErase, 0);
 	}
+
+	@Override
+	public Entry<String, String> getInfoEntry(Device<?, ?, ?, ?> device) {
+		return new AbstractMap.SimpleEntry("Writes per erase", Double.toString(getLogicalWritesPerErase(device)));
+	}
 }

@@ -64,8 +64,15 @@ public class ParityOverheadGetter<D extends RAIDBasicDevice<?,?,?,?>, S extends 
 		if (!(device instanceof RAIDBasicDevice)) {
 			return 1;
 		}
-		int total = ((RAIDBasicDevice<?,?,?,?>) device).getTotalParityWritten() + ((RAIDBasicDevice<?,?,?,?>) device).getTotalDataWritten();
-		double parityOverhead = total==0 ? 1 : ((double)total)/((RAIDBasicDevice<?,?,?,?>) device).getTotalDataWritten();
+		int total = ((RAIDBasicDevice<?,?,?,?>) device).getTotalParityWritten() + ((RAIDBasicDevice<?,?,?,?>) device).getTotalDataWritten()+ ((RAIDBasicDevice<?,?,?,?>) device).getTotalDataMoved()
+				+ ((RAIDBasicDevice<?,?,?,?>) device).getTotalParityMoved();
+		double parityOverhead = total==0 ? 1 : ((double)total)/ (((RAIDBasicDevice<?,?,?,?> device).getTotalDataWritten()
+						+ ((RAIDBasicDevice<?,?,?,?>) device).getTotalDataMoved());
 		return parityOverhead;
  	}
+
+	@Override
+	public Entry<String, String> getInfoEntry(Device<?, ?, ?, ?> device) {
+		return new AbstractMap.SimpleEntry("Parity Overhead", Double.toString(getParityOverhead(device)));
+	}
 }

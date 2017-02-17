@@ -46,10 +46,10 @@ public class RAIDSimulationTraceParser extends TraceParserGeneral<RAIDDevice, RA
 				int size = Integer.parseInt(operationParts[3]);
 				return manager.writeLP(device, lp, size);
 			} catch (NumberFormatException e) {
-				System.out.println("\n\nIllegal Logical Page given: " + operationParts[2] + " line:" + line);
+				MessageLog.log(new ErrorMessage("Illegal Logical Page given: " + operationParts[2] + " line:" + line));
 			}
 		}
-		System.out.println("\n\nIllegal trace line: " + command + " line:" + line);
+		MessageLog.log(new ErrorMessage("Illegal trace line: " + command + " line:" + line));
 		return null;
 	}
 

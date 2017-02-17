@@ -79,6 +79,11 @@ public class WritesToGCGetter extends SecondWritesStatisticsGetter {
 		}
 		return list;
 	}
+	
+	@Override
+	public Entry<String, String> getInfoEntry(Device<?, ?, ?, ?> device) {
+		return null;
+	}
 
 	@Override
 	public GeneralStatisticsGraph getStatisticsGraph() {

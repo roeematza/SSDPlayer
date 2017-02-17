@@ -86,4 +86,9 @@ public class BlockStateDistributionGetter implements StatisticsGetter {
 	public GeneralStatisticsGraph getStatisticsGraph() {
 		return new StatisticsGraph("Block State Dist.", this);
 	}
+	
+	@Override
+	public Entry<String, String> getInfoEntry(Device<?, ?, ?, ?> device) {
+		return null;
+	}
 }

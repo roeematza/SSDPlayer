@@ -94,4 +94,9 @@ public class WriteLevelDistributionGetter extends SecondWritesStatisticsGetter {
 	public GeneralStatisticsGraph getStatisticsGraph() {
 		return new StatisticsGraph("W.L.Dist.", this);
 	}
+	
+	@Override
+	public Entry<String, String> getInfoEntry(Device<?, ?, ?, ?> device) {
+		return null;
+	}
 }

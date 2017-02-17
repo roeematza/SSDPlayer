@@ -76,6 +76,11 @@ public class HotColdWriteAmplificationGetter extends HotColdStatisticsGetter {
 	}
 
 	@Override
+	public Map.Entry<String, String> getInfoEntry(Device<?, ?, ?, ?> device) {
+		return null;
+	}
+
+	@Override
 	public GeneralStatisticsGraph getStatisticsGraph() {
 		return new RegularHistoryGraph("HotCold Write Amplification", this, 1.5, 1);
 	}

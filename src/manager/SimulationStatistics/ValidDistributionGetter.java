@@ -80,4 +80,9 @@ public class ValidDistributionGetter extends SimulationStatisticsGetter {
 	public GeneralStatisticsGraph getStatisticsGraph() {
 		return new StatisticsGraph("Valid "+writeLevel+" Histogram", this);
 	}
+
+	@Override
+	public Entry<String, String> getInfoEntry(Device<?, ?, ?, ?> device) {
+		return null;
+	}
 }

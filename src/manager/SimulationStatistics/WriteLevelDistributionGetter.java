@@ -91,6 +91,11 @@ public class WriteLevelDistributionGetter extends SimulationStatisticsGetter {
 	}
 
 	@Override
+	public Entry<String, String> getInfoEntry(Device<?, ?, ?, ?> device) {
+		return null;
+	}
+
+	@Override
 	public GeneralStatisticsGraph getStatisticsGraph() {
 		return new StatisticsGraph("W.L.Dist.", this);
 	}

@@ -67,6 +67,28 @@ public class ValidDistributionGetter implements StatisticsGetter {
 	}
 
 	@Override
+	public Entry<String, String> getInfoEntry(Device<?, ?, ?, ?> device) {
+		List<StatisticsColumn> statistics = getStatistics(device);
+		StringBuilder sb = new StringBuilder();
+		int colCount = 0;
+		for (StatisticsColumn col : statistics) {
+			sb.append(col.getColumnName());
+			sb.append(": ");
+			sb.append((int) col.getValue());
+			colCount++;
+			if (colCount != statistics.size()) {
+				if (colCount % 6 == 5) {
+					sb.append(",\n");
+				} else {
+					sb.append(", ");
+				}
+			}
+		}
+
+		return new AbstractMap.SimpleEntry("Valid histogram", sb.toString());
+	}
+
+	@Override
 	public GeneralStatisticsGraph getStatisticsGraph() {
 		return new StatisticsGraph("Valid Histogram", this);
 	}

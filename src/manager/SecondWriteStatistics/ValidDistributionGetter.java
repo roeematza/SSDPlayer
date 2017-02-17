@@ -80,4 +80,26 @@ public class ValidDistributionGetter extends SecondWritesStatisticsGetter {
 	public GeneralStatisticsGraph getStatisticsGraph() {
 		return new StatisticsGraph("Valid "+writeLevel+" Histogram", this);
 	}
+
+	@Override
+	public Entry<String, String> getInfoEntry(Device<?, ?, ?, ?> device) {
+		List<StatisticsColumn> statistics = getStatistics(device);
+		StringBuilder sb = new StringBuilder();
+		int colCount = 0;
+		for (StatisticsColumn col : statistics) {
+			sb.append(col.getColumnName());
+			sb.append(": ");
+			sb.append((int) col.getValue());
+			colCount++;
+			if (colCount != statistics.size()) {
+				if (colCount % 6 == 5) {
+					sb.append(",\n");
+				} else {
+					sb.append(", ");
+				}
+			}
+		}
+
+		return new AbstractMap.SimpleEntry("Valid" + this.writeLevel + " histogram", sb.toString());
+	}
 }
