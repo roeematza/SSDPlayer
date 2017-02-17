@@ -24,6 +24,8 @@ package manager;
 import java.io.IOException;
 
 import entities.Device;
+import general.MessageLog;
+import log.Message.ErrorMessage;
 
 
 public class HotColdTraceParser<D extends Device<?,?,?,?>, S extends SSDManager<?,?,?,?,D>> extends TraceParserGeneral<D,S> {
