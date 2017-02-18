@@ -57,7 +57,7 @@ public class ManageBreakpointsDialog extends JDialog {
 		setModal(true);
 		setResizable(true);
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		setSize(460, 350);
+		setSize(720, 350);
 		setLocationRelativeTo(parentWindow);
 		initComponents();
 	}
@@ -151,8 +151,9 @@ public class ManageBreakpointsDialog extends JDialog {
 
 	private void buildBreakpointPanel(BreakpointBase breakpoint, JPanel breakpointPanel) {
 		breakpointPanel.setLayout(new GridBagLayout());
-		addBreakpointLabel(breakpoint, breakpointPanel);
+		JLabel lable = addBreakpointLabel(breakpoint, breakpointPanel);
 		addEditButton(breakpointPanel, breakpoint);
+		addActiveButton(breakpointPanel, breakpoint, lable);
 		addRemoveButton(breakpointPanel, breakpoint);
 		addSeparator(breakpointPanel);
 	}
@@ -242,7 +243,7 @@ public class ManageBreakpointsDialog extends JDialog {
 		GridBagConstraints constraints = new GridBagConstraints();
 		constraints.anchor = GridBagConstraints.EAST;
 		constraints.insets = new Insets(0,0,0,0);
-		constraints.gridx = 2;
+		constraints.gridx = 3;
 		
 		JButton removeButton = new JButton("X");
 		removeButton.addActionListener(new ActionListener() {
