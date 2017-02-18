@@ -22,6 +22,7 @@
 package entities.reusable;
 
 import entities.Device;
+import entities.EntityInfo;
 
 
 public class ReusableDevice extends Device<ReusablePage, ReusableBlock, ReusablePlane, ReusableChip> {

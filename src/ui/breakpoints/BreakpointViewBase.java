@@ -14,6 +14,8 @@ import javax.swing.SwingUtilities;
 
 import breakpoints.BreakpointBase;
 import breakpoints.BreakpointFactory;
+import general.MessageLog;
+import log.Message.ErrorMessage;
 
 public class BreakpointViewBase extends JPanel {
 	private static final long serialVersionUID = 1L;

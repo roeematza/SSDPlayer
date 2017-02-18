@@ -26,6 +26,8 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
+import java.awt.GraphicsEnvironment;
+import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -35,6 +37,7 @@ import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.UIManager;
@@ -58,7 +61,7 @@ import general.XMLGetter;
 import general.XMLParsingException;
 import manager.SSDManager;
 import manager.VisualConfig;
-import ui.breakpoints.LogView;
+import ui.LogView;
 import ui.zoom.ZoomLevelPanel;
 
 public class MainSimulationView extends JFrame {
@@ -75,6 +78,7 @@ public class MainSimulationView extends JFrame {
 	private TracePlayer tracePlayer;
 	private JPanel southInnerPanel;
 	private ZoomLevelPanel zoomLevelPanel;
+	private static LogView logView;
 
 	public static void main(String[] args) {
 		initLookAndFeel();
@@ -183,7 +187,8 @@ public class MainSimulationView extends JFrame {
 		southInnerPanel.setLayout(new BoxLayout(southInnerPanel, BoxLayout.X_AXIS));
 
 		LogView logView = new LogView();
-		MessageLog.initialize(logView, tracePlayer);
+		MessageLog.initialize(logView);
+		MessageLog.setTracePlayer(tracePlayer);
 		
 		initialBreakpoints = BreakpointsDeserializer.deserialize(BREAKPOINTS_XML);
 		tracePlayer.setInitialBreakpoints(initialBreakpoints);

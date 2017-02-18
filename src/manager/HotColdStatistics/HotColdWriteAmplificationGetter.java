@@ -23,7 +23,9 @@ package manager.HotColdStatistics;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map.Entry;
 
+import entities.Device;
 import entities.StatisticsColumn;
 import entities.hot_cold.HotColdChip;
 import entities.hot_cold.HotColdDevice;
@@ -76,7 +78,7 @@ public class HotColdWriteAmplificationGetter extends HotColdStatisticsGetter {
 	}
 
 	@Override
-	public Map.Entry<String, String> getInfoEntry(Device<?, ?, ?, ?> device) {
+	public Entry<String, String> getInfoEntry(Device<?, ?, ?, ?> device) {
 		return null;
 	}
 

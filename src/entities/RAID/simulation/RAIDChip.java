@@ -29,6 +29,7 @@ import org.javatuples.Triplet;
 import entities.ActionLog;
 import entities.Chip;
 import entities.CleanAction;
+import entities.EntityInfo;
 import entities.RAID.RAIDBasicChip;
 
 /**

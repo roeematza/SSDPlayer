@@ -1,5 +1,6 @@
 package zoom;
 
+import manager.SSDManager;
 import manager.VisualConfig;
 
 public class PagesZoomLevel implements IZoomLevel {

@@ -23,6 +23,7 @@ package manager.SecondWriteStatistics;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map.Entry;
 
 import manager.SSDManager;
 import ui.GeneralStatisticsGraph;

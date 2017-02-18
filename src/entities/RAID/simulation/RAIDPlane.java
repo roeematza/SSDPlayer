@@ -27,6 +27,7 @@ import org.javatuples.Pair;
 import org.javatuples.Triplet;
 
 import entities.BlockStatusGeneral;
+import entities.EntityInfo;
 import entities.RAID.RAIDBasicPlane;
 
 /**

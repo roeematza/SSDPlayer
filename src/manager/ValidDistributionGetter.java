@@ -21,8 +21,10 @@
  *******************************************************************************/
 package manager;
 
+import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map.Entry;
 
 import ui.GeneralStatisticsGraph;
 import ui.StatisticsGraph;
@@ -66,6 +68,7 @@ public class ValidDistributionGetter implements StatisticsGetter {
 		return list;
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public Entry<String, String> getInfoEntry(Device<?, ?, ?, ?> device) {
 		List<StatisticsColumn> statistics = getStatistics(device);

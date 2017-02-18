@@ -170,7 +170,7 @@ public class InfoDialog extends JDialog {
 	private void addStatisticsToDeviceInfo(Iterable<StatisticsGetter> statisticsGetters, EntityInfo entityInfo,
 			Device<?, ?, ?, ?> device) {
 		for (StatisticsGetter getter : statisticsGetters) {
-			Map.Entry<String, String> infoEntry = getter.getInfoEntry(device);
+			Entry<String, String> infoEntry = getter.getInfoEntry(device);
 			if (infoEntry != null) {
 				entityInfo.add((String) infoEntry.getKey(), (String) infoEntry.getValue(), 5);
 			}

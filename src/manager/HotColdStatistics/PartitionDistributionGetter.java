@@ -23,11 +23,13 @@ package manager.HotColdStatistics;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map.Entry;
 
 import manager.HotColdSSDManager;
 import ui.GeneralStatisticsGraph;
 import ui.StatisticsGraph;
 import entities.BlockStatusGeneral;
+import entities.Device;
 import entities.StatisticsColumn;
 import entities.hot_cold.HotColdBlock;
 import entities.hot_cold.HotColdChip;
@@ -73,7 +75,7 @@ public class PartitionDistributionGetter extends HotColdStatisticsGetter {
 		return new StatisticsGraph("Partition Dist.", this);
 	}
 
-	public Map.Entry<String, String> getInfoEntry(Device<?, ?, ?, ?> device) {
+	public Entry<String, String> getInfoEntry(Device<?, ?, ?, ?> device) {
 		return null;
 	}
 }

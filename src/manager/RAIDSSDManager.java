@@ -37,6 +37,8 @@ import general.XMLParsingException;
 import manager.RAIDStatistics.ParityOverheadGetter;
 import ui.AddressWidget;
 import ui.WorkloadWidget;
+import zoom.BlocksRaidParityZoomLevel;
+import zoom.SmallBlocksRaidParityZoomLevel;
 
 /**
  * 

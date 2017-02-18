@@ -21,8 +21,10 @@
  *******************************************************************************/
 package manager.RAIDStatistics;
 
+import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map.Entry;
 
 import entities.Device;
 import entities.StatisticsColumn;
@@ -66,7 +68,7 @@ public class ParityOverheadGetter<D extends RAIDBasicDevice<?,?,?,?>, S extends 
 		}
 		int total = ((RAIDBasicDevice<?,?,?,?>) device).getTotalParityWritten() + ((RAIDBasicDevice<?,?,?,?>) device).getTotalDataWritten()+ ((RAIDBasicDevice<?,?,?,?>) device).getTotalDataMoved()
 				+ ((RAIDBasicDevice<?,?,?,?>) device).getTotalParityMoved();
-		double parityOverhead = total==0 ? 1 : ((double)total)/ (((RAIDBasicDevice<?,?,?,?> device).getTotalDataWritten()
+		double parityOverhead = total==0 ? 1 : ((double)total)/ (((RAIDBasicDevice<?,?,?,?>)device).getTotalDataWritten()
 						+ ((RAIDBasicDevice<?,?,?,?>) device).getTotalDataMoved());
 		return parityOverhead;
  	}

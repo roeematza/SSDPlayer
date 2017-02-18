@@ -7,6 +7,7 @@ import org.javatuples.Pair;
 import org.javatuples.Triplet;
 
 import entities.Device;
+import entities.EntityInfo;
 
 /**
  * 

@@ -27,6 +27,7 @@ import java.util.List;
 
 import org.javatuples.Triplet;
 
+import entities.EntityInfo;
 import entities.Page;
 import general.Consts;
 

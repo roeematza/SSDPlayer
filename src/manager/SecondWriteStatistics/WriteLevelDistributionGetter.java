@@ -26,11 +26,13 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import manager.ReusableSSDManager;
 import ui.GeneralStatisticsGraph;
 import ui.StatisticsGraph;
+import entities.Device;
 import entities.StatisticsColumn;
 import entities.reusable.ReusableBlock;
 import entities.reusable.ReusableChip;

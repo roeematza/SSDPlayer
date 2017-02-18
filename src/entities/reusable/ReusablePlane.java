@@ -31,6 +31,7 @@ import org.javatuples.Pair;
 
 import utils.Utils;
 import entities.BlockStatusGeneral;
+import entities.EntityInfo;
 import entities.Plane;
 
 public class ReusablePlane extends Plane<ReusablePage, ReusableBlock> {

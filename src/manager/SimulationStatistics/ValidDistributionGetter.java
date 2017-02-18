@@ -24,11 +24,13 @@ package manager.SimulationStatistics;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import manager.ReusableVisualizationSSDManager;
 import ui.GeneralStatisticsGraph;
 import ui.StatisticsGraph;
+import entities.Device;
 import entities.StatisticsColumn;
 import entities.reusable_visualization.VisualizationBlock;
 import entities.reusable_visualization.VisualizationChip;

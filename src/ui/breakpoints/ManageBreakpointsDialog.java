@@ -3,6 +3,7 @@ package ui.breakpoints;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -10,9 +11,11 @@ import java.awt.Insets;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.font.TextAttribute;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.swing.BorderFactory;
@@ -30,6 +33,8 @@ import javax.swing.border.EmptyBorder;
 
 import breakpoints.BreakpointBase;
 import breakpoints.IBreakpoint;
+import general.MessageLog;
+import log.Message.ErrorMessage;
 import manager.SSDManager;
 
 public class ManageBreakpointsDialog extends JDialog {
@@ -159,7 +164,7 @@ public class ManageBreakpointsDialog extends JDialog {
 		updateNoBreakpointsLabelVisibility();
 	}
 
-	private void addBreakpointLabel(IBreakpoint breakpoint, JPanel breakpointPanel) {
+	private JLabel addBreakpointLabel(IBreakpoint breakpoint, JPanel breakpointPanel) {
 		GridBagConstraints constraints = new GridBagConstraints();
 		constraints.gridx = 0;
 		constraints.fill = GridBagConstraints.HORIZONTAL;
@@ -174,6 +179,7 @@ public class ManageBreakpointsDialog extends JDialog {
 		return breakpointLabel;
 	}
 
+	@SuppressWarnings("unchecked")
 	private void updateBreakpointActiveLableFont(IBreakpoint breakpoint, JLabel breakpointLabel) {
 		Map attributes = breakpointLabel.getFont().getAttributes();
 		attributes.put(TextAttribute.STRIKETHROUGH, Boolean.valueOf(!breakpoint.isActive()));

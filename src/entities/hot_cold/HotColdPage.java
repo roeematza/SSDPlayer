@@ -25,6 +25,7 @@ import java.awt.Color;
 
 import utils.Utils;
 import manager.HotColdSSDManager;
+import entities.EntityInfo;
 import entities.Page;
 
 public class HotColdPage extends Page {
