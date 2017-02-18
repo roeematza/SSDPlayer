@@ -246,4 +246,12 @@ public abstract class RAIDBasicPage extends Page {
 			}
 		}
 	}
+
+	public EntityInfo getInfo() {
+		EntityInfo result = super.getInfo();
+
+		result.add("Stripe", Integer.toString(getStripe()), 1);
+		result.add("Parity number", Integer.toString(getParityNumber()), 1);
+		return result;
+	}
 }

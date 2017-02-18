@@ -221,4 +221,12 @@ public abstract class RAIDBasicDevice<P extends RAIDBasicPage, B extends RAIDBas
 		details = details.setAt1(pages);
 		return details;
 	}
+
+	public EntityInfo getInfo() {
+		EntityInfo result = super.getInfo();
+
+		result.add("Total parity pages written", Integer.toString(getTotalParityWritten()), 2);
+		result.add("Total data pages written", Integer.toString(getTotalDataWritten()), 2);
+		return result;
+	}
 }

@@ -155,7 +155,17 @@ public class HotColdBlock extends Block<HotColdPage> {
 	}
 
 	public float getBlockTemperatureToMaxTempRatio() {
-		int maxTemperature = manager.getMaxTemperature();
-		return getAveragePageTemperature()/maxTemperature;
+		int maxTemperature = this.manager.getMaxTemperature();
+		return getAveragePageTemperature() / maxTemperature;
+	}
+
+	public EntityInfo getInfo() {
+		EntityInfo result = super.getInfo();
+
+		result.add("Average page temperature", Float.toString(getAveragePageTemperature()), 2);
+		result.add("Status", getDisplayStatusName(), 1);
+
+		result.add("Partition", getPartition() != null ? getPartition().getDsiplayName() : "None", 1);
+		return result;
 	}
 }

@@ -93,4 +93,11 @@ public class HotColdPage extends Page {
 		} 
 		return manager.getTemperatureColor(temperature);
 	}
+
+	public EntityInfo getInfo() {
+		EntityInfo result = super.getInfo();
+
+		result.add("Temperature", Integer.toString(getTemperature()), 5);
+		return result;
+	}
 }

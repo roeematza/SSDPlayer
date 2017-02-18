@@ -107,5 +107,9 @@ public class ReusablePage extends Page {
 		} else {
 			return manager.getWriteLevelColor(writeLevel);
 		}
+	public EntityInfo getInfo() {
+		EntityInfo result = super.getInfo();
+		result.add("Write level", Integer.toString(getWriteLevel()), 1);
+		return result;
 	}
 }

@@ -65,6 +65,11 @@ public class ReusablePlane extends Plane<ReusablePage, ReusableBlock> {
 			super.validate();
 			Utils.validateNotNull(plane.manager, "manager");
 		}
+
+		public Builder setGCExecutions(int gcExecutions) {
+			this.plane.gcExecutions = gcExecutions;
+			return this;
+		}
 	}
 		
 	private int activeRecycledBlockIndex = -1;
@@ -78,9 +83,12 @@ public class ReusablePlane extends Plane<ReusablePage, ReusableBlock> {
 	protected ReusablePlane() {}
 		
 
+	private int gcExecutions = 0;
+
 	protected ReusablePlane(ReusablePlane other) {
 		super(other);
 		this.manager = other.manager;
+		this.gcExecutions = other.gcExecutions;
 		initValues();
 	}
 
@@ -215,5 +223,26 @@ public class ReusablePlane extends Plane<ReusablePage, ReusableBlock> {
 			}
 			++i;
 		}
+	}
+	public EntityInfo getInfo() {
+		EntityInfo result = super.getInfo();
+
+		result.add("Recycled blocks", Integer.toString(getNumOfRecycledBlocks()), 3);
+		return result;
+	}
+
+	public int getNumOfRecycledBlocks() {
+		int numOfRecycledBlocks = 0;
+		for (ReusableBlock block : getBlocks()) {
+			if ((block.getStatus() == ReusableBlockStatus.ACTIVE_RECYCLED)
+					|| (block.getStatus() == ReusableBlockStatus.REUSED)) {
+				numOfRecycledBlocks++;
+			}
+		}
+		return numOfRecycledBlocks;
+	}
+
+	public int getGCExecutions() {
+		return this.gcExecutions;
 	}
 }
