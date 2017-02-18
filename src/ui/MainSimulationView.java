@@ -43,7 +43,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
-
+import log.Message.ErrorMessage;
 import breakpoints.BreakpointBase;
 import breakpoints.BreakpointsConstraints;
 import breakpoints.BreakpointsDeserializer;
@@ -77,6 +77,9 @@ public class MainSimulationView extends JFrame {
 	private ZoomLevelPanel zoomLevelPanel;
 
 	public static void main(String[] args) {
+		initLookAndFeel();
+		logView = new LogView();
+		MessageLog.initialize(logView);
 		try {
 			XMLGetter xmlGetter = new XMLGetter(CONFIG_XML);
 			
@@ -86,7 +89,6 @@ public class MainSimulationView extends JFrame {
 			
 			final VisualConfig visualConfig = new VisualConfig(xmlGetter);
 
-			initLookAndFeel();
 			EventQueue.invokeLater(new Runnable() {
 				public void run() {
 					try {
@@ -99,10 +101,31 @@ public class MainSimulationView extends JFrame {
 				}
 			});
 		} catch (ParserConfigurationException | SAXException | IOException | XMLParsingException e) {
-			throw new RuntimeException("Unable to load config XML file(" + CONFIG_XML + ")\n"+ e.getMessage());
+			MessageLog.log(
+					new ErrorMessage("Unable to load config XML file(resources/ssd_config.xml)\n" + e.getMessage()));
+			displayErrorFrame("Unable to load config XML file(resources/ssd_config.xml)\n" + e.getMessage());
 		}
 	}
 
+	private static void displayErrorFrame(String string) {
+		JLabel errorLabel = new JLabel(string);
+		errorLabel.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
+
+		JFrame errorFrame = new JFrame("Unable to load config XML");
+		errorFrame.getContentPane().add(errorLabel, "Center");
+		errorFrame.pack();
+
+		Dimension windowSize = errorFrame.getSize();
+		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		Point centerPoint = ge.getCenterPoint();
+
+		int dx = centerPoint.x - windowSize.width / 2;
+		int dy = centerPoint.y - windowSize.height / 2;
+		errorFrame.setLocation(dx, dy);
+
+		errorFrame.setDefaultCloseOperation(3);
+		errorFrame.setVisible(true);
+	}
 
 	public MainSimulationView(VisualConfig visualConfig) {
 		super("SSDPlayer " + VERSION);

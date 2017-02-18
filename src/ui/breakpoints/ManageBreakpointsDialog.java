@@ -130,7 +130,10 @@ public class ManageBreakpointsDialog extends JDialog {
 
 	public void addBreakpoint(BreakpointBase newBreakpoint) {
 		for (BreakpointBase bp : mBreakpoints.keySet()) {
-			if (bp.isEquals(newBreakpoint)) return;
+			if (bp.isEquals(newBreakpoint)) {
+				MessageLog.log(new ErrorMessage("Breakpoint already exists."));
+				return;
+			}
 		}
 		
 		JPanel breakpointPanel = new JPanel();
@@ -165,8 +168,17 @@ public class ManageBreakpointsDialog extends JDialog {
 		constraints.insets = new Insets(1,1,1,3);
 		
 		JLabel breakpointLabel = new JLabel(breakpoint.getDescription());
+		updateBreakpointActiveLableFont(breakpoint, breakpointLabel);
 		breakpointLabel.setOpaque(true);
 		breakpointPanel.add(breakpointLabel, constraints);
+		return breakpointLabel;
+	}
+
+	private void updateBreakpointActiveLableFont(IBreakpoint breakpoint, JLabel breakpointLabel) {
+		Map attributes = breakpointLabel.getFont().getAttributes();
+		attributes.put(TextAttribute.STRIKETHROUGH, Boolean.valueOf(!breakpoint.isActive()));
+		Font newFont = new Font(attributes);
+		breakpointLabel.setFont(newFont);
 	}
 
 	private void addEditButton(final JPanel breakpointPanel, final BreakpointBase breakpoint) {
@@ -191,6 +203,25 @@ public class ManageBreakpointsDialog extends JDialog {
 		breakpointPanel.add(editButton, constraints);
 	}
 	
+		private void addActiveButton(JPanel breakpointPanel, final BreakpointBase breakpoint,
+			final JLabel breakpointLabel) {
+		GridBagConstraints constraints = new GridBagConstraints();
+		constraints.anchor = 13;
+		constraints.insets = new Insets(1, 5, 1, 1);
+		constraints.gridx = 2;
+
+		final JButton activeButton = new JButton(breakpoint.isActive() ? "Active" : "Inactive");
+		activeButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				breakpoint.setIsActive(!breakpoint.isActive());
+				ManageBreakpointsDialog.this.updateBreakpointActiveLableFont(breakpoint, breakpointLabel);
+				activeButton.setText(breakpoint.isActive() ? "Active" : "Inactive");
+			}
+		});
+		activeButton.setPreferredSize(new Dimension(85, 25));
+		breakpointPanel.add(activeButton, constraints);
+	}
+
 	private void editBreakpoint(JPanel breakpointPanel, final BreakpointBase oldBreakpoint, 
 			BreakpointBase newBreakpoint) {
 		breakpointPanel.removeAll();
