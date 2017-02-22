@@ -56,6 +56,7 @@ import entities.ActionLog;
 import entities.Device;
 import entities.StatisticsGetter;
 import entities.RAID.RAIDBasicPage;
+import general.ConfigProperties;
 import general.Consts;
 import general.MessageLog;
 import general.OneObjectCallback;
@@ -496,6 +497,10 @@ public class TracePlayer extends JPanel {
 				String errorString = "Trace has ended before stop frame was reached";
 				MessageLog.log(new ErrorMessage(errorString));
 				System.out.println(errorString);
+				return false;
+			}
+			if (updatedDevice.getNumOfBlockErasures() > ConfigProperties.getMaxErasures()) {
+				MessageLog.log(new ErrorMessage("Erase count exeeded max erasures"));
 				return false;
 			}
 		} catch (Throwable e) {

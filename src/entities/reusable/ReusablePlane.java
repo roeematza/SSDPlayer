@@ -141,7 +141,8 @@ public class ReusablePlane extends Plane<ReusablePage, ReusableBlock> {
 		
 		int gcInvocations = (toMove > 0)? getTotalGCInvocations() + 1 : getTotalGCInvocations();
 		Builder builder = getSelfBuilder();
-		builder.setBlocks(cleanBlocks).setTotalGCInvocations(gcInvocations);
+		builder.setGCExecutions(getGCExecutions() + 1).setBlocks(cleanBlocks).setTotalGCInvocations(gcInvocations)
+		.setTotalWritten(getTotalWritten());
 		return new Pair<ReusablePlane, Integer>(builder.build(), toMove);
 	}
 

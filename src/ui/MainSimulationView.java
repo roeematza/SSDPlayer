@@ -47,6 +47,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 import log.Message.ErrorMessage;
+import log.Message.Message;
 import breakpoints.BreakpointBase;
 import breakpoints.BreakpointsConstraints;
 import breakpoints.BreakpointsDeserializer;
@@ -90,6 +91,11 @@ public class MainSimulationView extends JFrame {
 			ConfigProperties.initialize(xmlGetter);
 			BreakpointsConstraints.initialize(xmlGetter);
 			SSDManager.initializeManager(xmlGetter);
+			String checkResult = checkXmlValues(xmlGetter);
+			if(checkResult != null){
+				displayErrorFrame(checkResult);
+				return;
+			}
 			
 			final VisualConfig visualConfig = new VisualConfig(xmlGetter);
 
@@ -100,15 +106,27 @@ public class MainSimulationView extends JFrame {
 						window.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/ui/images/SSDPlayer.ico")));;
 						window.setVisible(true);
 					} catch (Exception e) {
-						e.printStackTrace();
+						displayErrorFrame("Unable to load Simulation \n" + e.toString());
 					} 
 				}
 			});
-		} catch (ParserConfigurationException | SAXException | IOException | XMLParsingException e) {
+		} catch (Exception e) {
 			MessageLog.log(
 					new ErrorMessage("Unable to load config XML file(resources/ssd_config.xml)\n" + e.getMessage()));
 			displayErrorFrame("Unable to load config XML file(resources/ssd_config.xml)\n" + e.getMessage());
 		}
+	}
+
+	// Check xml values are legal.   
+	private static String checkXmlValues(XMLGetter xmlGetter) {
+		try {
+			if(xmlGetter.getIntField("physical","max_erasures") < 0){
+				return "max erasures is negative";
+			}
+		} catch (XMLParsingException e) {
+			return "max erasures is not specified in config";
+		}
+		return null;
 	}
 
 	private static void displayErrorFrame(String string) {
