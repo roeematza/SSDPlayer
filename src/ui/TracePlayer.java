@@ -135,6 +135,8 @@ public class TracePlayer extends JPanel {
 
 	private OneObjectCallback<Boolean> resetDeviceView;
 
+	private boolean abortSignal = false;
+
     public TracePlayer(VisualConfig visualConfig, TwoObjectsCallback<Device<?, ?, ?, ?>, Iterable<StatisticsGetter>> resetDevice, OneObjectCallback<Device<?,?,?,?>> updateDevice, OneObjectCallback<Boolean> resetDeviceView) {
     	Utils.validateNotNull(updateDevice, "Update device callback");
     	Utils.validateNotNull(resetDevice, "Reset device callback");
@@ -482,6 +484,10 @@ public class TracePlayer extends JPanel {
 			MessageLog.log(new InfoMessage("Simulation Ended"));
 			return false;
 		}
+		if (abortSignal) {
+			abortSignal = false;
+			return false;
+		}
 		try {
 			Device<?, ?, ?,?> updatedDevice = this.parser.parseNextCommand();
 			if (updatedDevice != null) {
@@ -497,10 +503,6 @@ public class TracePlayer extends JPanel {
 				String errorString = "Trace has ended before stop frame was reached";
 				MessageLog.log(new ErrorMessage(errorString));
 				System.out.println(errorString);
-				return false;
-			}
-			if (updatedDevice.getNumOfBlockErasures() > ConfigProperties.getMaxErasures()) {
-				MessageLog.log(new ErrorMessage("Erase count exeeded max erasures"));
 				return false;
 			}
 		} catch (Throwable e) {
@@ -591,5 +593,9 @@ public class TracePlayer extends JPanel {
 	private void showInfoDialog() {
 		pauseTrace();
 		this.infoDialog.setVisible(true);
+	}
+	
+	public void abort() {
+		abortSignal = true;
 	}
 }
